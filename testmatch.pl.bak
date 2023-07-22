@@ -1,0 +1,39 @@
+go:-
+write('What is the players name?'),
+read(Player),get_single_char(Code),
+hypothesis(Player,Check),
+write_list([Player,',is',Check]),nl.
+
+go:-
+write('The player is not suitable'),nl.
+
+criteria(Player,Runrate):-
+verify(Player,"have run rate greater than 80(y/n)?").
+
+criteria(Player,Strikerate):-
+verify(Player,"have run rate greater than 160(y/n)?").
+
+
+ask(Player,Question) :-
+write(Player),write(', do you'),write(Question),
+read(N),
+( (N == yes ; N == y)
+->
+assert(yes(Question));
+assert(no(Question)), fail).
+
+:-dynamic yes/1,no/1.
+
+verify(P,S):-
+(yes(S)->true;
+(no(S)->fail;
+ask(P,S))).
+
+hypothesis(Player,Eligible):-
+criteria(Player,Runrate),
+criteria(Player,Strikerate).
+
+write_list([]).
+write_list([Term| Terms]) :-
+write(Term),
+write_list(Terms).

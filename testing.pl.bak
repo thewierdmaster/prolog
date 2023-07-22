@@ -1,0 +1,8 @@
+go:-
+write('What is the players name?'),
+read(N),
+write('Does the player have run rate greater than 70?'),
+read(A),
+write('Does the player have strike rate greater than 150?'),
+read(B),
+format("~w is eligible",[N]).
